@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+   eeng510:
+      build:
+         context: .
+         dockerfile: Dockerfile
+         target: base
+      image: eeng510:latest
+      init: true
+      # set user to your user id which is usually 1000:1000 to check you user id run `echo $(id -u):$(id -g)`
+      user: 1000:1000
+      # pass through the port jupyter will start on so we can access it from the host machine
+      ports: 
+       - 8888:8888
+      environment:
+        # this will copy the display variable from your host into the container to allow windows to open from the container
+        DISPLAY:
+      volumes:
+         # mount where I will put aux data
+         - "/opt/data:/opt/data"
+         # passing through this file allows opening windows from the container in your host computer
+         - "/tmp/.X11-unix:/tmp/.X11-unix:rw"
+         # this is where jupyter will start up and where you should put your jupyter notebooks. currently it is set to the folder above this file
+         - "../:/tf"

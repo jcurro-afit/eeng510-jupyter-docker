@@ -1,0 +1,7 @@
+sympy
+scipy
+control
+actdiag
+blockdiag
+nwdiag
+seqdiag
